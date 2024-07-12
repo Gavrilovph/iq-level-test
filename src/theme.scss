@@ -22,6 +22,14 @@ body,p,h1,ul {
 }
 
 @font-face {
+  font-family: 'PTSerif';
+  src: url('./fonts/PTSerif-Bold.woff') format('woff'),
+       url('./fonts/PTSerif-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'Roboto';
   src: url('./fonts/Roboto-Light.woff') format('woff'),
        url('./fonts/Roboto-Light.woff2') format('woff2');
