@@ -1,4 +1,7 @@
 # iq-level-test
+git
+Fast IQ quiz 
+vue3 Composition API + Vue router + Vuex
 
 ## Project setup
 ```
