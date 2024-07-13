@@ -1,7 +1,9 @@
 <template>
   <main class="home">
-    <p class="home__text home__text-upper">Пройдите точный и быстрый</p>
-    <h1 class="home__title">Тест на <br> определение <br> IQ</h1>
+    <div class="home__container">
+      <p class="home__text home__text-upper">Пройдите точный и быстрый</p>
+      <h1 class="home__title">Тест на <br> определение <br> IQ</h1>
+    </div>
     <app-button class="btn__primary">
       <template #button >Пройти тест</template> 
     </app-button>
@@ -61,9 +63,8 @@ export default {
   background-image: url(../assets/main_bg.png);
   background-repeat: no-repeat;
   background-position: center;
-  background-attachment: fix;
   background-size: cover;
-  height: 115vh;
+  height: 765px;
 
   &__title {
     font-family: YesevaOne, sans-serif;
@@ -93,8 +94,7 @@ export default {
     }
 
     &-details {
-      font-size: 8px;
-      margin-top: 5px;
+      font-size: 10px;
     }
   }
 
@@ -208,7 +208,7 @@ export default {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  height: 85vh;
+  height: 560px;
   &__text {
     font-family: Merryweather, sans-serif;
     text-align: start;
