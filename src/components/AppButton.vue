@@ -35,6 +35,16 @@ export default {
       letter-spacing: 1px;
       margin-top: 200px;
       padding: 13px 30px;
+      &:disabled {
+        background-color:#DADADA;
+        box-shadow: inset 0px 5px 10px rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    &__test {
+      position: absolute;
+      bottom: 50px;
+      transform: translate(-50%, -50%);
     }
 
     &__transparent {

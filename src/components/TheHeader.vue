@@ -1,6 +1,7 @@
 <template>
   <header class="header">
     <button class="header__btn" type="button"></button>
+    <slot></slot>
   </header>
 </template>
 
