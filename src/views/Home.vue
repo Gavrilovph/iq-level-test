@@ -2,10 +2,10 @@
   <main class="home">
     <p class="home__text home__text-upper">Пройдите точный и быстрый</p>
     <h1 class="home__title">Тест на <br> определение <br> IQ</h1>
-    <app-button class="home__btn home__btn-test">
+    <app-button class="btn__primary">
       <template #button >Пройти тест</template> 
     </app-button>
-    <p class="home__text home__text-yelow">И получите рекомендации <br> по развитию своего интеллекта</p>
+    <p class="home__text home__text-yellow">И получите рекомендации <br> по развитию своего интеллекта</p>
     <p class="home__text">и улучшению финансового <br> благосостояния и личной жизни</p>
     <button class="home__btn home__btn-details"></button>
     <p class="home__text home__text-details">Подробнее</p>
@@ -25,21 +25,22 @@
       которая принесет вам скорейший<br> финансовый результат.</p>
     </div>
     <img class="results__img" src="../assets/brain_img.png" alt="a brain developing img">
-    <app-button style="margin: -10px 0 40px;" class="home__btn home__btn-test">
+    <app-button style="margin: -10px 0 40px;" class="btn__primary">
       <template #button >Пройти тест</template> 
     </app-button>
   </section>
   <section class="duration">
-    <p class="duration__text">Прохождение теста займет у вас не более 12 минут, а его результаты вы сможете использовать всю жизнь.</p>
-    <!-- ToDoo Strongs -->
+    <p class="duration__text">Прохождение теста займет у вас не более <strong class="duration__text-yellow">12 минут</strong>, а его <strong>результаты</strong> вы сможете <strong class="duration__text-yellow">использовать всю жизнь.</strong></p>
     <div class="duration__container"> 
-      <p class="duration__container-text">Профессиональная<br> интерпретация и детально <strong>проработанные<br>рекомендации</strong> позволят вам качественно <strong>изменить все<br>аспекты своей жизни:</strong> от финансового до любовного.</p>
+      <p class="duration__container-text">Профессиональная<br> интерпретация и детально <strong> проработанные<br>рекомендации </strong> позволят вам качественно <strong>изменить все<br>аспекты своей жизни:</strong> от финансового до любовного.</p>
     </div>
-    <app-button style="margin: 33px 0 52px;" class="home__btn home__btn-test">
+    <span class="duration__lighting duration__lighting-left"></span>
+    <span class="duration__lighting duration__lighting-right"></span>
+    <app-button style="margin: 33px 0 52px;" class="btn__transparent">
       <template #button >Пройти тест</template> 
     </app-button>
     <ul class="duration__list">
-      <li class="duration__list-item duration__copyright-icon">dfgsdg</li>
+      <li class="duration__list-item duration__copyright-icon"></li>
       <li class="duration__list-item duration__copyright">2019</li>
     </ul>
   </section>
@@ -60,6 +61,7 @@ export default {
   background-image: url(../assets/main_bg.png);
   background-repeat: no-repeat;
   background-position: center;
+  background-attachment: fix;
   background-size: cover;
   height: 115vh;
 
@@ -85,7 +87,7 @@ export default {
       padding-top: 35px;
     }
 
-    &-yelow {
+    &-yellow {
       color:#FFC700;
       margin-top: 25px;
     }
@@ -97,18 +99,6 @@ export default {
   }
 
   &__btn {
-    &-test {
-      background-color:#FFC700;
-      font-family: Merryweather, sans-serif;
-      text-transform: uppercase;
-      border: none;
-      cursor: pointer;
-      border-radius: 30px;
-      font-size: 14px;
-      letter-spacing: 1px;
-      margin-top: 200px;
-      padding: 13px 30px;
-    }
 
     &-details {
       background-color: transparent;
@@ -131,6 +121,7 @@ export default {
   background-image: url(../assets/sparkle_bg.png);
   background-repeat: no-repeat;
   background-position: center;
+  background-attachment: fix;
   background-size: cover;
   width: 100%;
   height: 339px;
@@ -211,33 +202,66 @@ export default {
 }
 
 .duration {
+  position: relative;
   text-align: center;
   background-image: url(../assets/main_low_bg.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  height: 100vh;
+  height: 85vh;
   &__text {
     font-family: Merryweather, sans-serif;
     text-align: start;
     color: #ffff;
-    font-size: 15px;
-    width: 262px;
+    font-size: 17px;
+    width: 288px;
     margin: 0 12px;
     padding-top: 54px;
+    letter-spacing: 1px;
+    &-yellow {
+      color:#FFC700;
+    }
   }
 
   &__container {
-    background-color: hsl(0, 0%, 80%);
+    position: relative;
+    z-index: 1;
+    background-color: hsla(0, 0%, 100%, 0.8);
     border-radius: 20px;
-    margin: 15px 12px 0;
+    margin: 30px 12px 0;
     padding: 30px 15px;
     &-text {
       font-family: Merryweather, sans-serif;
       text-align: start;
       color: #181818;
-      line-height: 23px;
-      font-size: 16px;
+      line-height: 25px;
+      font-size: 20px;
+    }
+  }
+
+  &__lighting {
+    position: absolute;
+    z-index: 0;
+    &-left {
+      background-image: url(../assets/lightning_left.png);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      width: 165px;
+      height: 200px;
+      left: 0;
+      bottom: 44px;
+    }
+
+    &-right {
+      background-image: url(../assets/lightning_right.png);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      width: 165px;
+      height: 200px;
+      right: 0;
+      top: 88px;
     }
   }
 
@@ -250,14 +274,16 @@ export default {
   }
 
   &__copyright {
+    font-family: Roboto, sans-serif;
     color: hsl(0, 0%, 50%);
+    font-size: 10px;
     &-icon {
       background-image: url(../assets/copyright_icon.svg);
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
-      width: 14px;
-      height: 14px;
+      width: 8px;
+      height: 8px;
     }
   }
 }

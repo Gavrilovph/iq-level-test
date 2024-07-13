@@ -14,6 +14,14 @@ body,p,h1,ul {
 }
 
 @font-face {
+  font-family: 'Merryweather';
+  src: url('./fonts/Merriweather-Bold.woff') format('woff'),
+       url('./fonts/Merriweather-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'PTSerif';
   src: url('./fonts/PTSerif-Regular.woff') format('woff'),
        url('./fonts/PTSerif-Regular.woff2') format('woff2');
