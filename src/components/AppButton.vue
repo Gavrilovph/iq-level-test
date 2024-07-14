@@ -1,16 +1,17 @@
 <template>
-  <button :class="buttonClass">
+  <button :class="buttonClass" @click="this.$emit('goToTest')">
     <slot name="button"></slot>
   </button>
 </template>
 
 <script>
-import { defineProps } from 'vue'
 
 export default {
   props: ['class'],
+  emits: ['goToTest'],
 
   setup(props) {
+
   const buttonClass = props.class
 
     return {
@@ -43,7 +44,7 @@ export default {
 
     &__test {
       position: absolute;
-      bottom: 50px;
+      bottom: 25px;
       transform: translate(-50%, -50%);
     }
 

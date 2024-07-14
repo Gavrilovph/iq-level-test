@@ -4,7 +4,7 @@
       <p class="home__text home__text-upper">Пройдите точный и быстрый</p>
       <h1 class="home__title">Тест на <br> определение <br> IQ</h1>
     </div>
-    <app-button class="btn__primary">
+    <app-button class="btn__primary" @goToTest="toTest">
       <template #button >Пройти тест</template> 
     </app-button>
     <p class="home__text home__text-yellow">И получите рекомендации <br> по развитию своего интеллекта</p>
@@ -27,7 +27,7 @@
       которая принесет вам скорейший<br> финансовый результат.</p>
     </div>
     <img class="results__img" src="../assets/brain_img.png" alt="a brain developing img">
-    <app-button style="margin: -10px 0 40px;" class="btn__primary">
+    <app-button class="btn__primary" style="margin: -10px auto 40px;" @goToTest="toTest">
       <template #button >Пройти тест</template> 
     </app-button>
   </section>
@@ -38,7 +38,7 @@
     </div>
     <span class="duration__lighting duration__lighting-left"></span>
     <span class="duration__lighting duration__lighting-right"></span>
-    <app-button style="margin: 33px 0 52px;" class="btn__transparent">
+    <app-button class="btn__transparent" style="margin: 33px 0 52px;" @goToTest="toTest">
       <template #button >Пройти тест</template> 
     </app-button>
     <ul class="duration__list">
@@ -51,8 +51,20 @@
 
 <script>
 import AppButton from '../components/AppButton.vue'
+import {useRouter} from 'vue-router'
 
 export default {
+  setup() {
+    const router = useRouter()
+
+    const toTest = () => {
+      router.push('/test')
+    }
+
+    return {
+      toTest
+    }
+  },
   components: {AppButton}
 }
 </script>
