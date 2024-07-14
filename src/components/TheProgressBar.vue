@@ -23,11 +23,14 @@ export default {
     border-radius: 5px;
     overflow: hidden;
     height: 11px;
-    margin: 0 auto;
+    margin: 0 auto 15px;
+    position: relative;
+    top: 40px;
     &-fill {
-      height: 100%;
       background-color: #3BDE7C;
+      height: 100%;
       transition: width 0.3s;
+      border-radius: 5px;
     }
   }
 }
