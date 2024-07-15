@@ -44,7 +44,7 @@ export default {
 
     &__test {
       position: absolute;
-      bottom: 25px;
+      bottom: 15px;
       transform: translate(-50%, -50%);
     }
 

@@ -2,31 +2,33 @@
   <section class="test">
     <the-progress-bar :progress="progress"></the-progress-bar>
     <div class="test__container">
-      <h2 class="test__title">{{ currentQuestion.question }}</h2>
+      <h2 
+      :class="['test__title', dynamicTitleClass]" 
+      >{{ currentQuestion.question.title }}</h2> 
       <img 
         v-if="currentQuestion.atributes.url !== ''" 
-        :class="currentQuestion.atributes.class"
+        :class="currentQuestion.classes.img"
         :src="currentQuestion.atributes.url" 
         :alt="currentQuestion.atributes.alt" 
       >
       <div 
-        :class="{
-          'test__options': currentQuestion.atributes.class === '',
-          'test__options-figures': currentQuestion.atributes.class === 'test__figures'
-        }">
+        :class="[{'test__options': dynamicOptionsClass === ''}, dynamicOptionsClass]">
         <div 
-          :class="{
-            'test__option': currentQuestion.atributes.class === '',
-            'selected': selectedOption === option,
-            'test__option-figures': currentQuestion.atributes.class === 'test__figures'
-          }"
+          :class="[
+            {
+              'test__option': dynamicOptionClass === '',
+              'selected': selectedOption === option
+            },
+            dynamicOptionClass
+          ]"
+          :style="`background-color: ${option}`"
           v-for="(option, index) in currentQuestion.options" :key="index"
           >
           <label 
-          :class="{
-            'test__label': true,
-            'test__label-figures': currentQuestion.atributes.class === 'test__figures'
-            }" 
+          :class="[
+            'test__label',
+            dynamicLabelClass
+          ]" 
           :for="`option${index}`"
           >
             <input
@@ -38,10 +40,10 @@
             v-model="selectedOption"
             />
             <span 
-            :class="{
-              'test__span': currentQuestion.atributes.class === '',
-              'test__span-figures': currentQuestion.atributes.class === 'test__figures'
-              }"
+            :class="[
+              {'test__span': dynamicSpanClass === '' },
+              dynamicSpanClass
+            ]"
             ></span>
             {{ option }}
           </label>
@@ -67,62 +69,83 @@ export default {
   setup() {
     const questions = ref([
       {
-        question: 'Ваш пол:',
-        atributes: {url: '', alt: '', class: ''},
+        question: {title: 'Ваш пол:'},
+        atributes: {url: '', alt: ''},
+        classes: {title: 'test__gender', options: '', option: '', label: '', span: ''},
         options: ['Мужчина', 'Женщина']
       },
       {
-        question: 'Укажите возраст:',
-        atributes: {url: '', alt: '', class: ''},
+        question: {title: 'Укажите ваш возраст:'},
+        atributes: {url: '', alt: ''},
+        classes: {title: 'test__gender', options: '', option: '', label: '', span: ''},
         options: ['До 18', 'От 18 до 28', 'От 29 до 35', 'От 36']
       },
       {
-        question: 'Выберите лишнее:',
-        atributes: {url: '', alt: '', class: ''},
+        question: {title: 'Выберите лишнее:'},
+        atributes: {url: '', alt: ''},
+        classes: {title: 'test__extra', options: '', option: '', label: '', span: ''},
         options: ['Дом', 'Шалаш', 'Бунгало', 'Скамейка', 'Хижина',]
       },
       {
-        question: 'Продолжите числовой ряд: 18  20  24  32',
-        atributes: {url: '', alt: '', class: ''},
+        question: {title: 'Продолжите числовой ряд:  18  20  24  32'},
+        atributes: {url: '', alt: ''},
+        classes: {title: 'test__continue', options: '', option: '', label: '', span: ''},
         options: ['62', '48', '74', '57', '60', '77']
       },
       {
-        question: 'Выберите цвет, который сейчас наиболее Вам приятен:',
-        atributes: {url: '', alt: '', class: ''},
-        options: ['grey', 'blue', 'green', 'red', 'yellow', 'brown', 'black', 'purple', 'cyan']
+        question: {title: 'Выберите цвет, который сейчас наиболее вам приятен:'},
+        atributes: {url: '', alt: ''},
+        classes: {title:'', options: 'test__options-squares', option: 'test__option-squares', label: 'test__label-squares', span: 'test__span-squares'},
+        options: ['#A8A8A8', '#0000A9', '#00A701', '#F60100', '#FDFF19', '#A95403', '#000000', '#850068', '#46B2AC']
       },
       {
-        question: 'Какой из городов лишний?',
-        atributes: {url: '', alt: '', class: ''},
+        question: {title: 'Отдохните пару секунд, еще раз выберите цвет, который сейчас наиболее вам приятен:'},
+        atributes: {url: '', alt: ''},
+        classes: {title:'test__squares', options: 'test__options-squares', option: 'test__option-squares', label: 'test__label-squares', span: 'test__span-squares'},
+        options: ['#A8A8A8', '#46B2AC', '#A95403', '#00A701', '#000000', '#F60100', '#850068', '#FDFF19', '#0000A9']
+      },
+      {
+        question: {title:'Какой из городов лишний?'},
+        atributes: {url: '', alt: ''},
+        classes: {title:'test__city', options: '', option: '', label: '', span: ''},
         options: ['Вашингтон', 'Лондон', 'Париж', 'Нью-Йорк', 'Москва', 'Оттава']
       },
       {
-        question: 'Выберите правильную фигуру из четырёх пронумерованных.',
-        atributes: {url: 'src/assets/figures.png', alt: 'test picture of figures', class: 'test__figures'},
+        question: {title:'Выберите правильную фигуру из четырёх пронумерованных.'},
+        atributes: {url: '/assets/figures.png', alt: 'test picture of figures'},
+        classes: {title:'test__figure', options: 'test__options-figures', option: 'test__option-figures', label: 'test__label-figures', span: 'test__span-figures', img: 'test__figures'},
         options: ['1', '2', '3', '4']
       },
       {
-        question: 'Вам привычнее и важнее:',
-        atributes: {url: '', alt: '', class: ''},
-        options: ['Наслаждаться каждой минутой', 'Быть устремленными мыслями в будущее', 'Учитывать в ежедневной практике прошлый опыт']
+        question: {title:'Вам привычнее и важнее:'},
+        atributes: {url: '', alt: ''},
+        classes: {title: 'test__important', options: '', option: '', label: '', span: ''},
+        options: ['Наслаждаться каждой минутой проведенного времени', 'Быть устремленными мыслями в будущее', 'Учитывать в ежедневной практике прошлый опыт']
       },
       {
-        question: 'Какое определение, по-Вашему, больше подходит к этому геометрическому изображению:',
-        atributes: {url: '/assets/pyramid.png', alt: 'test picture of a pyramid', class: 'test__pyramid'},
+        question: {title:'Какое определение, по-Вашему, больше подходит к этому геометрическому изображению:'},
+        atributes: {url: '/assets/pyramid.png', alt: 'test picture of a pyramid'},
+        classes: {title:'test__geometric', options: '', option: '', label: '', span: '', img: 'test__pyramid'},
         options: ['Оно остроконечное', 'Оно устойчиво', 'Оно находится в состоянии равновесия']
       },
       {
-        question: 'Вставьте подходящее число:',
-        atributes: {url: '/assets/star.png', alt: 'test picture of a star with numbers', class: 'test__star'},
+        question: {title:'Вставьте подходящее число:'},
+        atributes: {url: '/assets/star.png', alt: 'test picture of a star with numbers'},
+        classes: {title:'test__stars', options: 'test__options-star', option: 'test__option-star', label: 'test__label-star', span: 'test__span-star',img: 'test__star'},
         options: ['34', '36', '53', '44', '66', '42']
       }
     ])
 
-    const currentIndex = ref(6)
+    const currentIndex = ref(0)
     const selectedOption = ref(null)
 
     let progress = computed(() => (currentIndex.value / questions.value.length) * 100)
     const currentQuestion = computed(() => questions.value[currentIndex.value])
+    const dynamicTitleClass = computed(() => currentQuestion.value.classes.title)
+    const dynamicOptionsClass = computed(() => currentQuestion.value.classes.options)
+    const dynamicOptionClass = computed(() => currentQuestion.value.classes.option)
+    const dynamicLabelClass = computed(() => currentQuestion.value.classes.label)
+    const dynamicSpanClass = computed(() => currentQuestion.value.classes.span)
 
     const nextQuestion = () => {
       if (currentIndex.value < questions.value.length - 1) {
@@ -135,15 +158,19 @@ export default {
       }
     }
 
-
-
+    console.log('sel', selectedOption);
     return {
       questions,
       currentIndex,
       selectedOption,
       currentQuestion,
       progress,
-      nextQuestion
+      nextQuestion,
+      dynamicTitleClass,
+      dynamicOptionsClass,
+      dynamicOptionClass,
+      dynamicSpanClass,
+      dynamicLabelClass
     }
   },
   components: { TheProgressBar, AppButton }
@@ -160,11 +187,11 @@ export default {
   background-position: center;
   background-size: cover;
   text-align: center;
-  padding-top: 17px;
   width: 100%;
   height: 100vh;
   top: 0;
   color: #ffff;
+  text-rendering: geometricPrecision;
 
 
   &__container {
@@ -185,12 +212,13 @@ export default {
 //images
   &__figures {
     margin-top: 20px;
-    width: 250px;
+    width: 240px;
   }
 
   &__pyramid {
     width: 173px;
     height: 115px;
+    margin-bottom: 20px;
   }
 
   &__star {
@@ -198,32 +226,95 @@ export default {
     height: 207px;
   }
 
+//dynamicTitles
+  &__squares {
+    width: 255px;
+    font-size: 19px;
+    margin-top: -30px;
+  }
+
+  &__geometric {
+    font-size: 17px;
+    margin: 5px 0 25px;
+  }
+
+  &__stars {
+    font-size: 24px;
+  }
+
+  &__gender {
+    margin: -24px 0 50px;
+  }
+
+  &__age {
+    margin: -24px 0 50px;
+  }
+
+  &__extra {
+    margin: -24px 0 50px;
+  }
+  &__continue {
+    line-height: 31px;
+    width: 270px;
+    margin: 20px 0 30px;
+  }
+
+  &__city {
+    width: 250px;
+    margin: 20px 0 30px;
+  }
+
+  &__important {
+    margin: 0 0 40px;
+  }
+
 //options
   &__options {
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 8px;
     text-align: start;
     align-self: normal;
+    gap: 10px;
 
-    &-figures {
+    &-figures,&-star {
       display: flex;
       justify-content: space-evenly;
       width: 100%;
       gap: 8px;
       color: #000000;
+    }
 
+    &-figures {
+      gap: 0px;
+    }
+
+    &-squares {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      width: 320px;
+      flex-wrap: wrap;
+      text-align: center;
+      margin: 40px 0 -10px;
+      transform: scale(1.2);
+    }
+
+    &-star {
+      margin-top: 25px;
+      border-top: 5px solid hsla(180, 4%, 95%, 0.15);
+      gap: 0;
     }
   }
 
   &__option {
     background-color: hwb(180 95% 5% / 0.15);
+    padding: 15px 10px;
     &.selected {
     background-color: #FFC700;
     color: #000000;
     }
-    &-figures {
+    &-figures,&-star {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -238,27 +329,46 @@ export default {
         pointer-events: none; /* Бордюр не будет перехватывать события мыши */
       }
     }
+    &-squares {
+      width: 75px;
+      height: 75px;
+      color: transparent;
+      &.selected {
+        content: "";
+        border: 7px solid #FFC700; /* Устанавливаем ваш цвет и ширину бордюра */
+        box-sizing: border-box; /* Учитываем размеры бордюра */
+        pointer-events: none; /* Бордюр не будет перехватывать события мыши */
+      }
+    }
+    &-star {
+
+    }
   }
 
   &__span {
     display: inline-block;
+    min-width: 20px;
     width: 20px;
     height: 20px;
     border: 1px solid #ffff;
     border-radius: 50%;
     position: relative;
-    vertical-align: middle;
-    margin: 0 35px;
+    margin: 0 35px 0 25px;
     cursor: pointer;
     &-figures {
     }
   }
 
   &__label {
+    display: flex;
     font-size: 18px;
-    line-height: 58px;
+    align-items: center;
+
     &-figures {
-      
+    }
+    &-squares {
+      width: 100%;
+      height: 100%;
     }
   }
 

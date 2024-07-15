@@ -18,12 +18,12 @@ export default {
 <style lang="scss" scoped>
 .progress {
   &__bar {
-    width: 260px;
+    width: 300px;
     background-color: hsla(0, 0%, 95%, 0.60);
     border-radius: 5px;
     overflow: hidden;
     height: 11px;
-    margin: 0 auto 15px;
+    margin: 20px auto 15px;
     position: relative;
     top: 40px;
     &-fill {
