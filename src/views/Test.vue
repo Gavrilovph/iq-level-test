@@ -141,6 +141,8 @@ export default {
 
     let progress = computed(() => (currentIndex.value / questions.value.length) * 100)
     const currentQuestion = computed(() => questions.value[currentIndex.value])
+
+    // Classes
     const dynamicTitleClass = computed(() => currentQuestion.value.classes.title)
     const dynamicOptionsClass = computed(() => currentQuestion.value.classes.options)
     const dynamicOptionClass = computed(() => currentQuestion.value.classes.option)
@@ -158,7 +160,6 @@ export default {
       }
     }
 
-    console.log('sel', selectedOption);
     return {
       questions,
       currentIndex,
@@ -340,9 +341,6 @@ export default {
         pointer-events: none; /* Бордюр не будет перехватывать события мыши */
       }
     }
-    &-star {
-
-    }
   }
 
   &__span {
@@ -355,8 +353,6 @@ export default {
     position: relative;
     margin: 0 35px 0 25px;
     cursor: pointer;
-    &-figures {
-    }
   }
 
   &__label {
@@ -364,8 +360,6 @@ export default {
     font-size: 18px;
     align-items: center;
 
-    &-figures {
-    }
     &-squares {
       width: 100%;
       height: 100%;

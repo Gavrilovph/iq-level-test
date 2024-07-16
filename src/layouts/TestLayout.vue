@@ -1,4 +1,5 @@
 <template>
+  <the-modal v-if="modal"></the-modal>
   <the-header>
     <img class="header__icon" src="../assets/rain_bk3.png" alt="a picture of blue brain">
     <h1 class="header__title">Тест на определение IQ</h1>
@@ -9,9 +10,19 @@
 </template>
 
 <script>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 import TheHeader from '../components/TheHeader.vue'
+import TheModal from '../components/TheModal.vue'
+
 export default {
-  components: {TheHeader}
+  setup() {
+    const store = useStore()
+    const modal = computed(() => store.getters.modal)
+
+    return {modal}
+  },
+  components: {TheHeader,TheModal}
 }
 </script>
 

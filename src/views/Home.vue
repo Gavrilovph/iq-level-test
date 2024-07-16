@@ -1,5 +1,5 @@
 <template>
-  <main class="home">
+  <main class="home" id="home">
     <div class="home__container">
       <p class="home__text home__text-upper">Пройдите точный и быстрый</p>
       <h1 class="home__title">Тест на <br> определение <br> IQ</h1>
@@ -12,7 +12,7 @@
     <button class="home__btn home__btn-details"></button>
     <p class="home__text home__text-details">Подробнее</p>
   </main>
-  <section class="description">
+  <section class="description" id="description">
     <div class="description__quote description__quote-open"></div>
     <div class="description__quote description__quote-close"></div>
     <div class="description__gradient"></div>
@@ -76,7 +76,7 @@ export default {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  height: 765px;
+  height: 785px;
 
   &__title {
     font-family: YesevaOne, sans-serif;
@@ -122,7 +122,7 @@ export default {
       cursor: pointer;
       width: 16px;
       height: 16px;
-      margin-top: 20px;
+      margin-top: 35px;
     }
   }
 }

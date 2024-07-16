@@ -1,12 +1,23 @@
 <template>
   <header class="header">
-    <button class="header__btn" type="button"></button>
+    <button class="header__btn" type="button" @click="openModal"></button>
     <slot></slot>
   </header>
 </template>
 
 <script>
+import { useStore } from 'vuex';
+
 export default {
+  setup() {
+    const store = useStore()
+
+    const openModal = () => store.commit('openModal')
+
+    return {
+      openModal
+    }
+  }
 
 }
 </script>
@@ -29,8 +40,9 @@ export default {
     background-size: contain;
     cursor: pointer;
 
-    &:focus {
+    &:focus,&:active {
       outline: none;
+      
     }
   }
 }
