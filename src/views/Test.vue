@@ -1,7 +1,7 @@
 <template>
   <section class="test">
     <the-progress-bar :progress="progress"></the-progress-bar>
-    <div class="test__container">
+    <div class="test__container" v-if="!showResultsProcessing">
       <h2 
       :class="['test__title', dynamicTitleClass]" 
       >{{ currentQuestion.question.title }}</h2> 
@@ -49,7 +49,12 @@
           </label>
         </div>
       </div>
-  </div>
+    </div>
+    <div class="test__processing" v-else-if="showResultsProcessing">
+      <h2 class="test__title-processing">Обработка результатов</h2>
+      <img src="" alt="loader gif">
+      <p class="test__text-processing">Определение стиля мышления..................................................................</p>
+    </div>
   <app-button
   :disabled="!selectedOption" @click="nextQuestion" 
   style="margin-top: 0;"
@@ -62,6 +67,7 @@
 
 <script>
 import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import TheProgressBar from '../components/TheProgressBar.vue'
 import AppButton from '../components/AppButton.vue'
 
@@ -136,10 +142,12 @@ export default {
       }
     ])
 
-    const currentIndex = ref(0)
+    const router = useRouter()
+    const currentIndex = ref(8)
     const selectedOption = ref(null)
+    const showResultsProcessing = ref(false)
+    let progress = ref(0)
 
-    let progress = computed(() => (currentIndex.value / questions.value.length) * 100)
     const currentQuestion = computed(() => questions.value[currentIndex.value])
 
     // Classes
@@ -153,8 +161,17 @@ export default {
       if (currentIndex.value < questions.value.length - 1) {
         currentIndex.value++;
         selectedOption.value = null;
-      } else if (currentIndex.value = questions.value.length - 1) { //ToDoo дописать прогресс бар, чтобы доконца доходил, тут какая-то трабла в условии, посмотреть. А может переписать иначе
-        progress = 100
+
+        progress.value = (currentIndex.value / questions.value.length) * 100
+      } else if (currentIndex.value === questions.value.length - 1) {
+        console.log('end of the test');
+        showResultsProcessing.value = true
+        progress.value = 100
+
+        setTimeout(() => {
+          router.push('/')
+        }, 3000);
+        
       } else {
         console.log('ошибка');
       }
@@ -171,7 +188,8 @@ export default {
       dynamicOptionsClass,
       dynamicOptionClass,
       dynamicSpanClass,
-      dynamicLabelClass
+      dynamicLabelClass,
+      showResultsProcessing
     }
   },
   components: { TheProgressBar, AppButton }
