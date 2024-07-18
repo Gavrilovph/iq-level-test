@@ -188,7 +188,7 @@ export default {
 .results{
   position: relative;
   width: 100%;
-  height: 96vh;
+  min-height: 100vh;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -203,7 +203,7 @@ export default {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     background-image: url('../assets/main_low_bg.png');
     background-repeat: repeat;
     background-position: center;
