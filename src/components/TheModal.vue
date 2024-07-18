@@ -77,6 +77,7 @@ export default {
     }
     &__link {
       text-decoration: none;
+      color: #ffff;
       &:visited {
         color: #ffff;
       }
