@@ -10,7 +10,7 @@
     <p class="results__text results__text-personal">В целях защиты персональных 
       данных результаты теста, их подробная интерпретация и рекомендации доступны в виде голосового сообщения по звонку с вашего мобильного телефона
     </p>
-    <p class="results__timer">Скорее звоните, запись доступна всего <br><span class="results__timer-span">{{ timeLeft > 0 ? (minutes + ':' + seconds) : '00:00' }}</span> минут</p>
+    <p class="results__timer">Звоните скорее, запись доступна всего <br><span class="results__timer-span">{{ timeLeft > 0 ? (minutes + ':' + seconds) : '00:00' }}</span> минут</p>
     <div class="results__request">
       <img class="results__request-img" src="../assets/phone_icon.svg" alt="an icon of a phone">
       <button class="results__request-btn" type="button" @click="fetchData">
@@ -186,27 +186,38 @@ export default {
 
 <style lang="scss" scoped>
 .results{
-  position: absolute;
-  top: 0;
-  z-index: -1;
+  position: relative;
+  width: 100%;
+  height: 96vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items:center;
-  background-image: url(../assets/main_low_bg.png);
-  background-repeat: repeat;
-  background-position: center;
-  background-size: cover;
   text-align: center;
   color: #ffff;
-  width: 100%;
   text-rendering: geometricPrecision;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/main_low_bg.png');
+    background-repeat: repeat;
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+  }
+
   &__title {
     font-family: PTSerif, sans-serif;
     font-size: 15px;
     line-height: 16px;
     color: #ffff;
     text-transform: uppercase;
-    margin-top: 80px;
+    margin-top: 30px;
     font-weight: 800;
     letter-spacing: 1px;
   }
@@ -290,7 +301,7 @@ export default {
     color: hsla(0, 0%, 100%, 0.5);
     width: 95%;
     letter-spacing: 3px;
-    margin-top: 143px;
+    margin-top: 145px;
     &-data {
       margin-top: 30px,
     }
