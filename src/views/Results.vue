@@ -69,7 +69,10 @@
         </div>
       </div>
     </div>
-    <p :class="{'results__terms': true, 'results__terms-data': data}">TERMENI SI CONDITII: ACESTA ESTE UN SERVICIU <br>DE DIVERTISMENT. PRIN FOLOSIREA LUI <br>DECLARATI CA AVETI 18 ANI IMPLINITI</p>
+    <p 
+      :class="{'results__terms': true, 'results__terms-data': data}"
+      >TERMENI SI CONDITII: ACESTA ESTE UN SERVICIU <br>DE DIVERTISMENT. PRIN FOLOSIREA LUI <br>DECLARATI CA AVETI 18 ANI IMPLINITI
+    </p>
   </section>
 </template>
 

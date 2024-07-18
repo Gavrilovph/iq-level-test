@@ -3,8 +3,8 @@
     <the-progress-bar :progress="progress"></the-progress-bar>
     <div class="test__container" v-if="!showResultsProcessing">
       <h2 
-      :class="['test__title', dynamicTitleClass]" 
-      >{{ currentQuestion.question.title }}</h2> 
+        :class="['test__title', dynamicTitleClass]" 
+        >{{ currentQuestion.question.title }}</h2> 
       <img 
         v-if="currentQuestion.atributes.url !== ''" 
         :class="currentQuestion.classes.img"
@@ -15,35 +15,29 @@
         :class="[{ 'test__options': dynamicOptionsClass === '' }, dynamicOptionsClass]">
         <div 
           :class="[
-      {
-        'test__option': dynamicOptionClass === '',
-        'selected': selectedOption === option
-      },
-      dynamicOptionClass
-    ]"
+          {'test__option': dynamicOptionClass === '', 'selected': selectedOption === option},
+          dynamicOptionClass
+          ]"
           :style="`background-color: ${option}`"
           v-for="(option, index) in currentQuestion.options" :key="index"
-          >
+        >
           <label 
-          :class="[
-      'test__label',
-      dynamicLabelClass
-    ]" 
-          :for="`option${index}`"
+            :class="['test__label', dynamicLabelClass]" 
+            :for="`option${index}`"
           >
             <input
-            class="test__input"
-            type="radio"
-            :id="`option${index}`"
-            :name="`question${currentIndex}`"
-            :value="option"
-            v-model="selectedOption"
+              class="test__input"
+              type="radio"
+              :id="`option${index}`"
+              :name="`question${currentIndex}`"
+              :value="option"
+              v-model="selectedOption"
             />
             <span 
-            :class="[
-      { 'test__span': dynamicSpanClass === '' },
-      dynamicSpanClass
-    ]"
+              :class="[
+              { 'test__span': dynamicSpanClass === '' },
+              dynamicSpanClass
+              ]"
             ></span>
             {{ option }}
           </label>
@@ -56,10 +50,10 @@
       <p class="test__processing-text">Определение стиля мышления............. .............................................................</p>
     </div>
   <app-button
-  v-if="!showResultsProcessing"
-  :disabled="!selectedOption" @click="nextQuestion" 
-  style="margin-top: 0;"
-  class="btn__primary btn__test"
+    v-if="!showResultsProcessing"
+    :disabled="!selectedOption" @click="nextQuestion" 
+    style="margin-top: 0;"
+    class="btn__primary btn__test"
   >
     <template #button>Далее</template>
 </app-button>
@@ -146,7 +140,7 @@ export default {
     const router = useRouter()
     const currentIndex = ref(0)
     const selectedOption = ref(null)
-    const showResultsProcessing = ref(true)
+    const showResultsProcessing = ref(false)
     let progress = ref(0)
 
     const currentQuestion = computed(() => questions.value[currentIndex.value])
@@ -363,7 +357,7 @@ export default {
       color: transparent;
       &.selected {
         content: "";
-        border: 7px solid #FFC700;
+        border: 7px solid #FFC700; 
         box-sizing: border-box;
         pointer-events: none; 
       }
