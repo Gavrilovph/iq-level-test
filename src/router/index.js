@@ -17,6 +17,14 @@ const routes = [
     meta: {
       layout: 'test'
     }
+  },
+  {
+    path: '/results',
+    name: 'Results',
+    component: () => import('../views/Results.vue'),
+    meta: {
+      layout: 'test'
+    }
   }
 ]
 

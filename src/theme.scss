@@ -46,6 +46,14 @@ body,p,h1,ul {
 }
 
 @font-face {
+  font-family: 'Roboto';
+  src: url('./fonts/Roboto-Medium.woff') format('woff'),
+       url('./fonts/Roboto-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'YesevaOne';
   src: url('./fonts/YesevaOne-Regular.woff') format('woff'),
        url('./fonts/YesevaOne-Regular.woff2') format('woff2');

@@ -12,23 +12,23 @@
         :alt="currentQuestion.atributes.alt" 
       >
       <div 
-        :class="[{'test__options': dynamicOptionsClass === ''}, dynamicOptionsClass]">
+        :class="[{ 'test__options': dynamicOptionsClass === '' }, dynamicOptionsClass]">
         <div 
           :class="[
-            {
-              'test__option': dynamicOptionClass === '',
-              'selected': selectedOption === option
-            },
-            dynamicOptionClass
-          ]"
+      {
+        'test__option': dynamicOptionClass === '',
+        'selected': selectedOption === option
+      },
+      dynamicOptionClass
+    ]"
           :style="`background-color: ${option}`"
           v-for="(option, index) in currentQuestion.options" :key="index"
           >
           <label 
           :class="[
-            'test__label',
-            dynamicLabelClass
-          ]" 
+      'test__label',
+      dynamicLabelClass
+    ]" 
           :for="`option${index}`"
           >
             <input
@@ -41,9 +41,9 @@
             />
             <span 
             :class="[
-              {'test__span': dynamicSpanClass === '' },
-              dynamicSpanClass
-            ]"
+      { 'test__span': dynamicSpanClass === '' },
+      dynamicSpanClass
+    ]"
             ></span>
             {{ option }}
           </label>
@@ -51,22 +51,23 @@
       </div>
     </div>
     <div class="test__processing" v-else-if="showResultsProcessing">
-      <h2 class="test__title-processing">Обработка результатов</h2>
-      <img src="" alt="loader gif">
-      <p class="test__text-processing">Определение стиля мышления..................................................................</p>
+      <h2 class="test__processing-title">Обработка результатов</h2>
+      <img class="test__processing-loader" src="../assets/loader_spinner.gif" alt="loader gif">
+      <p class="test__processing-text">Определение стиля мышления............. .............................................................</p>
     </div>
   <app-button
+  v-if="!showResultsProcessing"
   :disabled="!selectedOption" @click="nextQuestion" 
   style="margin-top: 0;"
   class="btn__primary btn__test"
   >
     <template #button>Далее</template>
-  </app-button>
+</app-button>
 </section>
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref, computed, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import TheProgressBar from '../components/TheProgressBar.vue'
 import AppButton from '../components/AppButton.vue'
@@ -75,77 +76,77 @@ export default {
   setup() {
     const questions = ref([
       {
-        question: {title: 'Ваш пол:'},
-        atributes: {url: '', alt: ''},
-        classes: {title: 'test__gender', options: '', option: '', label: '', span: ''},
+        question: { title: 'Ваш пол:' },
+        atributes: { url: '', alt: '' },
+        classes: { title: 'test__gender', options: '', option: '', label: '', span: '' },
         options: ['Мужчина', 'Женщина']
       },
       {
-        question: {title: 'Укажите ваш возраст:'},
-        atributes: {url: '', alt: ''},
-        classes: {title: 'test__gender', options: '', option: '', label: '', span: ''},
+        question: { title: 'Укажите ваш возраст:' },
+        atributes: { url: '', alt: '' },
+        classes: { title: 'test__gender', options: '', option: '', label: '', span: '' },
         options: ['До 18', 'От 18 до 28', 'От 29 до 35', 'От 36']
       },
       {
-        question: {title: 'Выберите лишнее:'},
-        atributes: {url: '', alt: ''},
-        classes: {title: 'test__extra', options: '', option: '', label: '', span: ''},
+        question: { title: 'Выберите лишнее:' },
+        atributes: { url: '', alt: '' },
+        classes: { title: 'test__extra', options: '', option: '', label: '', span: '' },
         options: ['Дом', 'Шалаш', 'Бунгало', 'Скамейка', 'Хижина',]
       },
       {
-        question: {title: 'Продолжите числовой ряд:  18  20  24  32'},
-        atributes: {url: '', alt: ''},
-        classes: {title: 'test__continue', options: '', option: '', label: '', span: ''},
+        question: { title: 'Продолжите числовой ряд:  18  20  24  32' },
+        atributes: { url: '', alt: '' },
+        classes: { title: 'test__continue', options: '', option: '', label: '', span: '' },
         options: ['62', '48', '74', '57', '60', '77']
       },
       {
-        question: {title: 'Выберите цвет, который сейчас наиболее вам приятен:'},
-        atributes: {url: '', alt: ''},
-        classes: {title:'', options: 'test__options-squares', option: 'test__option-squares', label: 'test__label-squares', span: 'test__span-squares'},
+        question: { title: 'Выберите цвет, который сейчас наиболее вам приятен:' },
+        atributes: { url: '', alt: '' },
+        classes: { title: '', options: 'test__options-squares', option: 'test__option-squares', label: 'test__label-squares', span: 'test__span-squares' },
         options: ['#A8A8A8', '#0000A9', '#00A701', '#F60100', '#FDFF19', '#A95403', '#000000', '#850068', '#46B2AC']
       },
       {
-        question: {title: 'Отдохните пару секунд, еще раз выберите цвет, который сейчас наиболее вам приятен:'},
-        atributes: {url: '', alt: ''},
-        classes: {title:'test__squares', options: 'test__options-squares', option: 'test__option-squares', label: 'test__label-squares', span: 'test__span-squares'},
+        question: { title: 'Отдохните пару секунд, еще раз выберите цвет, который сейчас наиболее вам приятен:' },
+        atributes: { url: '', alt: '' },
+        classes: { title: 'test__squares', options: 'test__options-squares', option: 'test__option-squares', label: 'test__label-squares', span: 'test__span-squares' },
         options: ['#A8A8A8', '#46B2AC', '#A95403', '#00A701', '#000000', '#F60100', '#850068', '#FDFF19', '#0000A9']
       },
       {
-        question: {title:'Какой из городов лишний?'},
-        atributes: {url: '', alt: ''},
-        classes: {title:'test__city', options: '', option: '', label: '', span: ''},
+        question: { title: 'Какой из городов лишний?' },
+        atributes: { url: '', alt: '' },
+        classes: { title: 'test__city', options: '', option: '', label: '', span: '' },
         options: ['Вашингтон', 'Лондон', 'Париж', 'Нью-Йорк', 'Москва', 'Оттава']
       },
       {
-        question: {title:'Выберите правильную фигуру из четырёх пронумерованных.'},
-        atributes: {url: '/assets/figures.png', alt: 'test picture of figures'},
-        classes: {title:'test__figure', options: 'test__options-figures', option: 'test__option-figures', label: 'test__label-figures', span: 'test__span-figures', img: 'test__figures'},
+        question: { title: 'Выберите правильную фигуру из четырёх пронумерованных.' },
+        atributes: { url: '/assets/figures.png', alt: 'test picture of figures' },
+        classes: { title: 'test__figure', options: 'test__options-figures', option: 'test__option-figures', label: 'test__label-figures', span: 'test__span-figures', img: 'test__figures' },
         options: ['1', '2', '3', '4']
       },
       {
-        question: {title:'Вам привычнее и важнее:'},
-        atributes: {url: '', alt: ''},
-        classes: {title: 'test__important', options: '', option: '', label: '', span: ''},
+        question: { title: 'Вам привычнее и важнее:' },
+        atributes: { url: '', alt: '' },
+        classes: { title: 'test__important', options: '', option: '', label: '', span: '' },
         options: ['Наслаждаться каждой минутой проведенного времени', 'Быть устремленными мыслями в будущее', 'Учитывать в ежедневной практике прошлый опыт']
       },
       {
-        question: {title:'Какое определение, по-Вашему, больше подходит к этому геометрическому изображению:'},
-        atributes: {url: '/assets/pyramid.png', alt: 'test picture of a pyramid'},
-        classes: {title:'test__geometric', options: '', option: '', label: '', span: '', img: 'test__pyramid'},
+        question: { title: 'Какое определение, по-Вашему, больше подходит к этому геометрическому изображению:' },
+        atributes: { url: '/assets/pyramid.png', alt: 'test picture of a pyramid' },
+        classes: { title: 'test__geometric', options: '', option: '', label: '', span: '', img: 'test__pyramid' },
         options: ['Оно остроконечное', 'Оно устойчиво', 'Оно находится в состоянии равновесия']
       },
       {
-        question: {title:'Вставьте подходящее число:'},
-        atributes: {url: '/assets/star.png', alt: 'test picture of a star with numbers'},
-        classes: {title:'test__stars', options: 'test__options-star', option: 'test__option-star', label: 'test__label-star', span: 'test__span-star',img: 'test__star'},
+        question: { title: 'Вставьте подходящее число:' },
+        atributes: { url: '/assets/star.png', alt: 'test picture of a star with numbers' },
+        classes: { title: 'test__stars', options: 'test__options-star', option: 'test__option-star', label: 'test__label-star', span: 'test__span-star', img: 'test__star' },
         options: ['34', '36', '53', '44', '66', '42']
       }
     ])
 
     const router = useRouter()
-    const currentIndex = ref(8)
+    const currentIndex = ref(0)
     const selectedOption = ref(null)
-    const showResultsProcessing = ref(false)
+    const showResultsProcessing = ref(true)
     let progress = ref(0)
 
     const currentQuestion = computed(() => questions.value[currentIndex.value])
@@ -157,6 +158,14 @@ export default {
     const dynamicLabelClass = computed(() => currentQuestion.value.classes.label)
     const dynamicSpanClass = computed(() => currentQuestion.value.classes.span)
 
+    const clearLocalStorage = () => {
+      localStorage.removeItem('endTime');
+    };
+
+
+    // Timeout
+    let redirectTimeout
+
     const nextQuestion = () => {
       if (currentIndex.value < questions.value.length - 1) {
         currentIndex.value++;
@@ -164,18 +173,18 @@ export default {
 
         progress.value = (currentIndex.value / questions.value.length) * 100
       } else if (currentIndex.value === questions.value.length - 1) {
-        console.log('end of the test');
         showResultsProcessing.value = true
         progress.value = 100
-
-        setTimeout(() => {
-          router.push('/')
-        }, 3000);
-        
+        clearLocalStorage() // delete the timer if it's new test finishing
+        redirectTimeout = setTimeout(() => router.push('/results'), 3000)
       } else {
         console.log('ошибка');
       }
     }
+
+    onUnmounted(() => {
+      clearTimeout(redirectTimeout);
+    });
 
     return {
       questions,
@@ -343,9 +352,9 @@ export default {
       height: 41px;
       &.selected {
         content: "";
-        border: 7px solid #FFC700; /* Устанавливаем ваш цвет и ширину бордюра */
-        box-sizing: border-box; /* Учитываем размеры бордюра */
-        pointer-events: none; /* Бордюр не будет перехватывать события мыши */
+        border: 7px solid #FFC700;
+        box-sizing: border-box;
+        pointer-events: none;
       }
     }
     &-squares {
@@ -354,9 +363,9 @@ export default {
       color: transparent;
       &.selected {
         content: "";
-        border: 7px solid #FFC700; /* Устанавливаем ваш цвет и ширину бордюра */
-        box-sizing: border-box; /* Учитываем размеры бордюра */
-        pointer-events: none; /* Бордюр не будет перехватывать события мыши */
+        border: 7px solid #FFC700;
+        box-sizing: border-box;
+        pointer-events: none; 
       }
     }
   }
@@ -403,6 +412,38 @@ export default {
     -moz-appearance: none;
     display: none;
   }
+
+  &__processing {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    &-title {
+      font-size: 25px;
+      width: 230px;
+      align-self: center;
+      margin-top: 70px;
+      text-rendering: geometricPrecision;
+      font-weight: 400;
+    }
+
+    &-loader {
+      display: flex;
+      width: 170px;
+      height: 170px;
+      align-self: center;
+      margin: -30px -25px;
+    }
+
+    &-text{
+      font-size: 14px;
+      text-align: start;
+      align-self: center;
+      max-width: 276px;
+      margin-top: 30px;
+    }
+  }
 }
+
+
 
 </style>
